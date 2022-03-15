@@ -276,10 +276,20 @@ function generateP1() {
 function toggle(approach) {
     const set = questionSets[approach];
     set.enabled = !set.enabled;
+    const hlCheckbox = document.getElementById(approach + "-hl-checkbox");
+    if (hlCheckbox != null) {
+        hlCheckbox.disabled = !set.enabled;
+    }
+    updateButtonStatus("saq-button", false);
+    updateButtonStatus("erq-button", true);
 }
 function toggleHl(approach) {
     const set = questionSets[approach];
     set.hlExtension = !set.hlExtension;
+}
+function updateButtonStatus(id, erq) {
+    const questionCount = questionSets.enabled(erq).length;
+    document.getElementById(id).disabled = (questionCount == 0);
 }
 // Set all approaches to be enabled by default
 document.addEventListener("DOMContentLoaded", () => {

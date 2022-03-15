@@ -320,11 +320,24 @@ function generateP1(): void {
 function toggle(approach: string) {
     const set: QuestionSet = questionSets[approach];
     set.enabled = !set.enabled;
+
+    const hlCheckbox = document.getElementById(approach + "-hl-checkbox");
+    if (hlCheckbox != null) {
+        (hlCheckbox as HTMLInputElement).disabled = !set.enabled;
+    }
+
+    updateButtonStatus("saq-button", false);
+    updateButtonStatus("erq-button", true);
 }
 
 function toggleHl(approach: string) {
     const set: QuestionSet = questionSets[approach];
     set.hlExtension = !set.hlExtension;
+}
+
+function updateButtonStatus(id: string, erq: boolean): void {
+    const questionCount = questionSets.enabled(erq).length;
+    (document.getElementById(id) as HTMLButtonElement).disabled = (questionCount == 0);
 }
 
 // Set all approaches to be enabled by default

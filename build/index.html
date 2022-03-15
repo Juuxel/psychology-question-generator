@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta charset="UTF-8"> 
     <title>Psychology Question Generator</title>
     <script src="main.js"></script>
     <style>
@@ -28,6 +29,10 @@
             margin: 0.5em;
             box-shadow: 0px 4px 10px 0px #E0E0E0;
         }
+
+        .checkboxes label, .buttons {
+            user-select: none;
+        }
     </style>
 </head>
 
@@ -37,31 +42,33 @@
         <p id="question">
             <em>Press one of the buttons below to generate a question.</em>
         </p>
-        <div>
-            <button onclick="generateSaq()">Generate SAQ</button>
-            <button onclick="generateErq()">Generate ERQ</button>
-            <button onclick="generateP1()">Generate Paper 1</button>
+        <div class="buttons">
+            <button id="saq-button" onclick="generateSaq()">🪅 Generate SAQ</button>
+            <button id="erq-button" onclick="generateErq()">🦜 Generate ERQ</button>
+            <button onclick="generateP1()">🫐 Generate Paper 1</button>
         </div>
     </div>
     <div class="card">
         <h2>Toggle approaches on/off</h2>
         <ul class="checkboxes">
-            <li><input class="approach-checkbox" type="checkbox" id="biological-checkbox" onclick="toggle('biological')">
-                <label for="biological-checkbox">Biological approach</label>
-                <input class="approach-checkbox" type="checkbox" id="biological-hl-checkbox" onclick="toggleHl('biological')">
-                <label for="biological-hl-checkbox">HL extensions</label>
-            <li><input class="approach-checkbox" type="checkbox" id="cognitive-checkbox" onclick="toggle('cognitive')">
-                <label for="cognitive-checkbox">Cognitive approach</label>
-                <input class="approach-checkbox" type="checkbox" id="cognitive-hl-checkbox" onclick="toggleHl('cognitive')">
-                <label for="cognitive-hl-checkbox">HL extensions</label>
-            <li><input class="approach-checkbox" type="checkbox" id="sociocultural-checkbox" onclick="toggle('sociocultural')">
-                <label for="sociocultural-checkbox">Sociocultural approach</label>
-                <input class="approach-checkbox" type="checkbox" id="sociocultural-hl-checkbox" onclick="toggleHl('sociocultural')">
-                <label for="cognitive-hl-checkbox">HL extensions</label>
-            <li><input class="approach-checkbox" type="checkbox" id="abnormal-checkbox" onclick="toggle('abnormal')">
-                <label for="abnormal-checkbox">Abnormal psychology</label>
+            <li><input class="approach-checkbox" type="checkbox" id="biological-checkbox"
+                       onclick="toggle('biological')"><label for="biological-checkbox">Biological approach</label>
+                <input class="approach-checkbox" type="checkbox" id="biological-hl-checkbox"
+                       onclick="toggleHl('biological')"><label for="biological-hl-checkbox">HL extension</label>
+            <li><input class="approach-checkbox" type="checkbox" id="cognitive-checkbox"
+                       onclick="toggle('cognitive')"><label for="cognitive-checkbox">Cognitive approach</label>
+                <input class="approach-checkbox" type="checkbox" id="cognitive-hl-checkbox"
+                       onclick="toggleHl('cognitive')"><label for="cognitive-hl-checkbox">HL extension</label>
+            <li><input class="approach-checkbox" type="checkbox" id="sociocultural-checkbox"
+                       onclick="toggle('sociocultural')"><label for="sociocultural-checkbox">Sociocultural approach</label>
+                <input class="approach-checkbox" type="checkbox" id="sociocultural-hl-checkbox"
+                       onclick="toggleHl('sociocultural')"><label for="sociocultural-hl-checkbox">HL extension</label>
+            <li><input class="approach-checkbox" type="checkbox" id="abnormal-checkbox"
+                       onclick="toggle('abnormal')"><label for="abnormal-checkbox">Abnormal psychology</label>
         </ul>
     </div>
+    <em>Don't use this as your only resource! This doesn't include all possible questions
+        and probably includes some impossible ones too.</em> 
 </body>
 
 </html>
