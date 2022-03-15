@@ -1,5 +1,8 @@
-rm -Recurse -Force build
+if (Test-Path build) {
+    Remove-Item -Recurse -Force build
+}
+
 mkdir build
-npm install
+npm ci
 npx tsc
-cp src/index.html build/index.html
+Copy-Item src/index.html build/index.html

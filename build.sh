@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-rm -rf build
+if [ -d "build" ]; then
+    rm -r build
+fi
+
 mkdir build
-npm install
+npm ci
 npx tsc
 cp src/index.html build
