@@ -1,0 +1,6 @@
+{
+    "name": "psychology-question-generator",
+    "dependencies": {
+        "typescript": "^4.6.2"
+    }
+}

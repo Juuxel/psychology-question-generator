@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+        "outFile": "build/main.js",
+        "target": "ES6"
+    },
+    "files": ["src/main.ts"]
+}

@@ -1,4 +1,5 @@
 rm -Recurse -Force build
 mkdir build
-tsc src/main.ts --outFile build/main.js -t es6
+npm install
+npx tsc
 cp src/index.html build/index.html
