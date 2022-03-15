@@ -69,10 +69,8 @@ class QuestionSets {
             "cognitive processing",
             "models of memory",
             "schema theory",
-            ONE + " model in thinking and decision-making",
             "reliability of cognitive processes",
             "reconstructive memory",
-            ONE + " bias in thinking and decision-making",
             "emotion and cognition",
             "the influence of emotion on cognitive processes",
         ];
@@ -82,6 +80,12 @@ class QuestionSets {
             "cognitive schemas",
             "rational thinking",
             "intuitive thinking",
+            ONE + " model of thinking and decision-making",
+            ONE + " bias in thinking and decision-making",
+        ];
+        this.cognitive.erqOnlyTopics = [
+            "models of thinking and decision-making",
+            "biases in thinking and decision-making",
         ];
         this.cognitive.hlOnlyTopics = [
             "cognitive processing in a technological world",
@@ -225,7 +229,7 @@ class QuestionType {
 }
 
 const saqQuestionTypes: [QuestionType, number][] = [
-    [new QuestionType("Explain", " with reference to " + ONE + " study").saq().setStudyVariant(new QuestionType("Explain")), 2],
+    [new QuestionType("Explain", " with reference to " + ONE + " study").saq().setStudyVariant(new QuestionType("Explain")), 4],
     [new QuestionType("Outline " + ONE + " study about").saq().setStudyVariant(new QuestionType("Outline")), 1],
 ];
 const erqQuestionTypes: [QuestionType, number][] = [
@@ -274,12 +278,20 @@ function pickWeighted<E>(pairs: [E, number][]): E {
 }
 
 /// Visualisation
-function setQuestion(questionTypes: [QuestionType, number][], erq: boolean): void {
+function setQuestionHtml(html: string): void {
+    document.getElementById("question").innerHTML = html;
+}
+
+function pickQuestion(questionTypes: [QuestionType, number][], questionSets: QuestionSet[]): string {
     let q: string | null = null;
 
-    while (q == null) q = pickWeighted(questionTypes).apply(pick(questionSets.enabled(erq)));
+    while (q == null) q = pickWeighted(questionTypes).apply(pick(questionSets));
 
-    document.getElementById("question").innerHTML = q;
+    return q;
+}
+
+function setQuestion(questionTypes: [QuestionType, number][], erq: boolean): void {
+    setQuestionHtml(pickQuestion(questionTypes, questionSets.enabled(erq)));
 }
 
 function generateSaq(): void {
@@ -288,6 +300,20 @@ function generateSaq(): void {
 
 function generateErq(): void {
     setQuestion(erqQuestionTypes, true);
+}
+
+function generateP1(): void {
+    const bioSaq = pickQuestion(saqQuestionTypes, [questionSets.biological]);
+    const cogSaq = pickQuestion(saqQuestionTypes, [questionSets.cognitive]);
+    const socSaq = pickQuestion(saqQuestionTypes, [questionSets.sociocultural]);
+    const bioErq = pickQuestion(erqQuestionTypes, [questionSets.biological]);
+    const cogErq = pickQuestion(erqQuestionTypes, [questionSets.cognitive]);
+    const socErq = pickQuestion(erqQuestionTypes, [questionSets.sociocultural]);
+    const html = "<h2>Section A</h2><ol><li>" + bioSaq
+        + "<li>" + cogSaq + "<li>" + socSaq
+        + "</ol><h2>Section B</h2><ol start=\"4\"><li>" + bioErq
+        + "<li>" + cogErq + "<li>" + socErq + "</ol>";
+    setQuestionHtml(html);
 }
 
 /// Configuration

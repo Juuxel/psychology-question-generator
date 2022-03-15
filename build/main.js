@@ -60,10 +60,8 @@ class QuestionSets {
             "cognitive processing",
             "models of memory",
             "schema theory",
-            ONE + " model in thinking and decision-making",
             "reliability of cognitive processes",
             "reconstructive memory",
-            ONE + " bias in thinking and decision-making",
             "emotion and cognition",
             "the influence of emotion on cognitive processes",
         ];
@@ -73,6 +71,12 @@ class QuestionSets {
             "cognitive schemas",
             "rational thinking",
             "intuitive thinking",
+            ONE + " model of thinking and decision-making",
+            ONE + " bias in thinking and decision-making",
+        ];
+        this.cognitive.erqOnlyTopics = [
+            "models of thinking and decision-making",
+            "biases in thinking and decision-making",
         ];
         this.cognitive.hlOnlyTopics = [
             "cognitive processing in a technological world",
@@ -197,7 +201,7 @@ class QuestionType {
     }
 }
 const saqQuestionTypes = [
-    [new QuestionType("Explain", " with reference to " + ONE + " study").saq().setStudyVariant(new QuestionType("Explain")), 2],
+    [new QuestionType("Explain", " with reference to " + ONE + " study").saq().setStudyVariant(new QuestionType("Explain")), 4],
     [new QuestionType("Outline " + ONE + " study about").saq().setStudyVariant(new QuestionType("Outline")), 1],
 ];
 const erqQuestionTypes = [
@@ -237,17 +241,36 @@ function pickWeighted(pairs) {
     return pick(flat);
 }
 /// Visualisation
-function setQuestion(questionTypes, erq) {
+function setQuestionHtml(html) {
+    document.getElementById("question").innerHTML = html;
+}
+function pickQuestion(questionTypes, questionSets) {
     let q = null;
     while (q == null)
-        q = pickWeighted(questionTypes).apply(pick(questionSets.enabled(erq)));
-    document.getElementById("question").innerHTML = q;
+        q = pickWeighted(questionTypes).apply(pick(questionSets));
+    return q;
+}
+function setQuestion(questionTypes, erq) {
+    setQuestionHtml(pickQuestion(questionTypes, questionSets.enabled(erq)));
 }
 function generateSaq() {
     setQuestion(saqQuestionTypes, false);
 }
 function generateErq() {
     setQuestion(erqQuestionTypes, true);
+}
+function generateP1() {
+    const bioSaq = pickQuestion(saqQuestionTypes, [questionSets.biological]);
+    const cogSaq = pickQuestion(saqQuestionTypes, [questionSets.cognitive]);
+    const socSaq = pickQuestion(saqQuestionTypes, [questionSets.sociocultural]);
+    const bioErq = pickQuestion(erqQuestionTypes, [questionSets.biological]);
+    const cogErq = pickQuestion(erqQuestionTypes, [questionSets.cognitive]);
+    const socErq = pickQuestion(erqQuestionTypes, [questionSets.sociocultural]);
+    const html = "<h2>Section A</h2><ol><li>" + bioSaq
+        + "<li>" + cogSaq + "<li>" + socSaq
+        + "</ol><h2>Section B</h2><ol start=\"4\"><li>" + bioErq
+        + "<li>" + cogErq + "<li>" + socErq + "</ol>";
+    setQuestionHtml(html);
 }
 /// Configuration
 function toggle(approach) {
