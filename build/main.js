@@ -205,7 +205,7 @@ const saqQuestionTypes = [
     [new QuestionType("Outline " + ONE + " study about").saq().setStudyVariant(new QuestionType("Outline")), 1],
 ];
 const erqQuestionTypes = [
-    [new QuestionType("Discuss").erq(), 3],
+    [new QuestionType("Discuss").erq(), 4],
     [new QuestionType("Evaluate research about").erq(), 2],
     [new QuestionType("Evaluate").erq().setTheoryOrModel(), 1],
 ];
