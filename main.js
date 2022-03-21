@@ -121,16 +121,25 @@ class QuestionSets {
             "social identity theory",
             "social cognitive theory",
         ];
-        this.abnormal = new QuestionSet();
-        this.abnormal.erqOnlyTopics = [
+        this.abnormalTopic1 = new QuestionSet();
+        this.abnormalTopic1.erqOnlyTopics = [
             "factors influencing diagnosis",
             "normality versus abnormality",
             "classification systems",
             "the role of clinical biases in diagnosis",
             "validity and reliability of diagnosis",
+        ];
+        this.abnormalTopic2 = new QuestionSet();
+        this.abnormalTopic2.erqOnlyTopics = [
             "etiology of abnormal psychology",
             "explanations for disorders",
+            "biological explanations for disorders",
+            "cognitive explanations for disorders",
+            "sociocultural explanations for disorders",
             "prevalence rates and disorders",
+        ];
+        this.abnormalTopic3 = new QuestionSet();
+        this.abnormalTopic3.erqOnlyTopics = [
             "treatment of disorders",
             "biological treatment of disorders",
             "psychological treatment of disorders",
@@ -140,7 +149,7 @@ class QuestionSets {
     }
     all(erq) {
         return erq
-            ? [this.biological, this.cognitive, this.sociocultural, this.abnormal]
+            ? [this.biological, this.cognitive, this.sociocultural, this.abnormalTopic1, this.abnormalTopic2, this.abnormalTopic3]
             : [this.biological, this.cognitive, this.sociocultural];
     }
     enabled(erq) {
